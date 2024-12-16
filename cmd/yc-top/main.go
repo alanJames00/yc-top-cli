@@ -1,11 +1,22 @@
 package main
 
 import (
-	"fmt"
-	"yc-top/services/hackernews"
+	"log"
+	"yc-top/ui"
+
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 func main() {
-	fmt.Println("Top HackerNews from YC")
-	hackernews.FetchTopStoryIDs()
+	// init the bubble tea model
+	m := ui.NewModel()
+
+	// create a program
+	p := tea.NewProgram(m)
+
+	// run
+	_, err := p.Run()
+	if err != nil {
+		log.Fatal("Error running bubbletea program")
+	}
 }
