@@ -1,6 +1,8 @@
 package ui
 
 import (
+	"yc-top/services/hackernews"
+
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -22,7 +24,15 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "r":
 			// return the cmd for fetchStories
 			return NewModel(), FetchStoriesCmd
-			// TODO: handle "enter" open
+		case "enter":
+			// same model, nil cmd
+			// get the url of current story
+			url := m.Stories[m.Cursor].URL
+			if err := hackernews.OpenBrowser(url); err != nil {
+				// m.Error = err
+				return m, nil
+			}
+			return m, nil
 		}
 
 	case StoriesMsg:
