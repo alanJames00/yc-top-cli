@@ -16,8 +16,6 @@ func FetchStoriesCmd() tea.Msg {
 		return err // if there is error, return it as a message
 	}
 
-	// fmt.Println("FetchTopStories", stories)
-
 	// return the fetched stories as teaMsg
 	return StoriesMsg{Stories: stories}
 }

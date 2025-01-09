@@ -19,6 +19,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if m.Cursor < len(m.Stories)-1 {
 				m.Cursor++
 			}
+		case "r":
+			// return the cmd for fetchStories
+			return NewModel(), FetchStoriesCmd
 			// TODO: handle "enter" open
 		}
 

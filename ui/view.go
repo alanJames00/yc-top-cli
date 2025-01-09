@@ -7,7 +7,7 @@ func (m model) View() string {
 	// header section
 	s := "news.ycombinator.com\n\n"
 
-	nav_footer := "\n\n[up/down: navigate, enter: open, q:quit]"
+	nav_footer := "\n\n[up/down: navigate, enter: open, r: refresh, q:quit]"
 	// check if IsLoading
 	if m.IsLoading {
 		s += "Loading Stories...\n"
