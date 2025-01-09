@@ -1,14 +1,27 @@
 // functions for opening the story URL in browser for major OS
 package hackernews
 
-import "github.com/pkg/browser"
+import (
+	"os/exec"
+	"runtime"
+)
 
-func OpenBrowser(url string) error {
-	err := browser.OpenURL(url)
-	if err != nil {
-		return err
+// silent browser opening without printing to stdout
+func SilentOpenBrowser(url string) error {
+	var cmd *exec.Cmd
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("cmd", "/c", "start", url)
+	case "darwin":
+		cmd = exec.Command("open", url)
+	default:  // linux and other unix-like systems
+		cmd = exec.Command("xdg-open", url)
 	}
-	
-	// opened succesfully
-	return nil
+
+	// surpress std outputs
+	cmd.Stderr = nil
+	cmd.Stdout = nil
+
+	return cmd.Run()
 }
