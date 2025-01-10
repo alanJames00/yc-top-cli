@@ -12,7 +12,7 @@ func main() {
 	m := ui.NewModel()
 
 	// create a program
-	p := tea.NewProgram(m)
+	p := tea.NewProgram(m, tea.WithAltScreen())
 
 	// run
 	_, err := p.Run()
